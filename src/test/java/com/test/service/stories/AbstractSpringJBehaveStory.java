@@ -3,8 +3,6 @@ package com.test.service.stories;
 import com.test.service.steps.ZipCodeApiSteps;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
-import org.jbehave.core.embedder.Embedder;
-import org.jbehave.core.embedder.EmbedderControls;
 import org.jbehave.core.io.*;
 import org.jbehave.core.junit.JUnitStories;
 import org.jbehave.core.reporters.FilePrintStreamFactory.ResolveToPackagedName;
@@ -21,14 +19,6 @@ import static org.jbehave.core.reporters.Format.*;
 
 public abstract class AbstractSpringJBehaveStory extends JUnitStories {
 
-    private static final int STORY_TIMEOUT = 120;
-
-    public AbstractSpringJBehaveStory() {
-        Embedder embedder = new Embedder();
-        embedder.useEmbedderControls(embedderControls());
-        embedder.useMetaFilters(Arrays.asList("-skip"));
-        useEmbedder(embedder);
-    }
 
     @Override
     public Configuration configuration() {
@@ -43,12 +33,6 @@ public abstract class AbstractSpringJBehaveStory extends JUnitStories {
     public InjectableStepsFactory stepsFactory() {
 
         return new InstanceStepsFactory(configuration(), new ZipCodeApiSteps());
-    }
-
-    private EmbedderControls embedderControls() {
-        return new EmbedderControls()
-                .doIgnoreFailureInView(true)
-                .useStoryTimeoutInSecs(STORY_TIMEOUT);
     }
 
     private ParameterControls parameterControls() {

@@ -18,4 +18,3 @@ mvn clean install
 as part of the run, jbehave automatically generates the report in html format. 
 it can be found under
 target/jbehave/view/reports.html
-
